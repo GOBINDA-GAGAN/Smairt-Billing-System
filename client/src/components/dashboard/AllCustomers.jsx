@@ -1,6 +1,7 @@
 import React from "react";
 import { customersData } from "../../constants/dashboardData";
-import { Eye, Search } from "lucide-react";
+import { Eye, MessageCircle, Search } from "lucide-react";
+import { SiWhatsapp } from "react-icons/si";
 
 const AllCustomers = () => {
   return (
@@ -71,7 +72,7 @@ const AllCustomers = () => {
 
       {/* Table */}
       <div className="w-full overflow-x-auto">
-        <table className="w-full min-w-[750px]">
+        <table className="w-full min-w-[850px]">
           <thead>
             <tr className="border-b border-secondary/20 text-left">
               <th className="px-5 py-3 text-xs font-medium text-secondary">
@@ -93,6 +94,9 @@ const AllCustomers = () => {
               <th className="px-5 py-3 text-xs font-medium text-secondary">
                 Action
               </th>
+              <th className="px-5 py-3 text-xs font-medium text-secondary">
+                WhatsApp
+              </th>
             </tr>
           </thead>
 
@@ -100,7 +104,7 @@ const AllCustomers = () => {
             {customersData.map((customer) => (
               <tr
                 key={customer.id}
-                className={`border-b border-secondary/10 transition hover:bg-secondary/5`}
+                className="border-b border-secondary/10 transition hover:bg-secondary/5"
               >
                 {/* Customer */}
                 <td className="px-5 py-4">
@@ -139,10 +143,38 @@ const AllCustomers = () => {
                 {/* Action */}
                 <td className="px-5 py-4">
                   <button
-                    className="flex h-8 w-8 items-center justify-center rounded-md text-secondary transition hover:bg-secondary/10 hover:text-primary"
+                    type="button"
+                    className="
+                flex h-8 w-8
+                items-center justify-center
+                rounded-md
+                text-secondary
+                transition
+                hover:bg-secondary/10
+                hover:text-primary
+              "
                     title="View customer"
                   >
                     <Eye size={16} />
+                  </button>
+                </td>
+
+                {/* WhatsApp */}
+                <td className="px-5 py-4">
+                  <button
+                    type="button"
+                    className="
+                flex h-8 w-8
+                items-center justify-center
+                rounded-md
+                text-secondary
+                transition
+                hover:bg-secondary/10
+                hover:text-primary
+              "
+                    title="WhatsApp customer"
+                  >
+                   <SiWhatsapp />
                   </button>
                 </td>
               </tr>
@@ -152,7 +184,7 @@ const AllCustomers = () => {
             {customersData.length === 0 && (
               <tr>
                 <td
-                  colSpan={5}
+                  colSpan={6}
                   className="px-5 py-12 text-center text-sm text-secondary"
                 >
                   No customers found.

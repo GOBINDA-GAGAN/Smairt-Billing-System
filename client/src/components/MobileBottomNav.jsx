@@ -5,6 +5,7 @@ import {
   Users,
   Package,
   MoreHorizontal,
+  Plus,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
@@ -15,11 +16,11 @@ const MobileBottomNav = () => {
       icon: LayoutDashboard,
       path: "/",
     },
-    {
-      label: "Bills",
-      icon: Receipt,
-      path: "/bills",
-    },
+  {
+    name: "New Bill",
+    path: "/new-bill",
+    icon: Plus,
+  },
     {
       label: "Customers",
       icon: Users,

@@ -11,8 +11,7 @@ import {
   CircleDollarSign,
   Wallet,
   Settings,
-  Crown,
-  Menu,
+  ChevronRight,
 } from "lucide-react";
 
 const menuItems = [
@@ -68,35 +67,139 @@ const menuItems = [
   },
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ collapsed, setCollapsed }) => {
   const location = useLocation();
 
   return (
-    <aside className="fixed left-0 top-0 z-50 flex h-screen w-64 flex-col border-r border-border bg-card px-4 py-5">
+    <aside
+      className={`
+        fixed
+        left-0
+        top-0
+        z-50
+        flex
+        h-screen
+        flex-col
+        border-r
+        border-border
+        bg-card
+        px-3
+        py-5
+        transition-[width]
+        duration-300
+        ease-in-out
+        ${collapsed ? "w-16" : "w-64"}
+      `}
+    >
       {/* Logo */}
-      <div className="flex items-center justify-between px-2">
-        <Link to="/dashboard" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
-            <Wallet size={19} strokeWidth={2.5} />
-          </div>
 
-          <div>
-            <h1 className="text-lg font-bold tracking-tight text-foreground">
-              ShopBill
-            </h1>
+      <div
+        className={`
+          flex
+          items-center
+          ${collapsed ? "justify-center" : "justify-between"}
+        `}
+      >
+        {/* Logo */}
 
-            <p className="text-[9px] font-medium text-muted-foreground">
-              Smart Billing for Smart Shops
-            </p>
+        <Link
+          to="/"
+          className={`
+            flex
+            items-center
+            overflow-hidden
+            transition-all
+            duration-200
+            ${collapsed ? "w-0 opacity-0" : "w-auto opacity-100"}
+          `}
+        >
+          <div className="flex shrink-0 items-center gap-2 px-1">
+            <div
+              className="
+                flex
+                h-9
+                w-9
+                shrink-0
+                items-center
+                justify-center
+                rounded-md
+                bg-primary
+                text-primary-foreground
+                shadow-sm
+              "
+            >
+              <Wallet
+                size={19}
+                strokeWidth={2.5}
+              />
+            </div>
+
+            <div className="whitespace-nowrap">
+              <h1
+                className="
+                  text-lg
+                  font-bold
+                  tracking-tight
+                  text-foreground
+                "
+              >
+                ShopBill
+              </h1>
+
+              <p
+                className="
+                  text-[9px]
+                  font-medium
+                  text-muted-foreground
+                "
+              >
+                Smart Billing for Smart Shops
+              </p>
+            </div>
           </div>
         </Link>
 
-        <button className="rounded-lg p-1.5 text-muted-foreground transition hover:bg-secondary hover:text-foreground">
-          <Menu size={17} />
+        {/* Collapse Button */}
+
+        <button
+          type="button"
+          onClick={() =>
+            setCollapsed((prev) => !prev)
+          }
+          title={
+            collapsed
+              ? "Expand sidebar"
+              : "Collapse sidebar"
+          }
+          className="
+            flex
+            h-8
+            w-8
+            shrink-0
+            items-center
+            justify-center
+            rounded-md
+            text-muted-foreground
+            transition-colors
+            duration-200
+            hover:bg-secondary
+            hover:text-foreground
+          "
+        >
+          <ChevronRight
+            size={17}
+            className={`
+              transition-transform
+              duration-300
+              ease-out
+              ${collapsed ? "rotate-180" : ""}
+            `}
+          />
         </button>
       </div>
 
       {/* Navigation */}
+
       <nav className="mt-7 flex-1 space-y-1.5">
         {menuItems.map((item) => {
           const Icon = item.icon;
@@ -104,58 +207,148 @@ const Sidebar = () => {
           const isActive =
             location.pathname === item.path ||
             (item.path !== "/" &&
-              location.pathname.startsWith(`${item.path}/`));
+              location.pathname.startsWith(
+                `${item.path}/`
+              ));
 
           return (
             <Link
               key={item.name}
               to={item.path}
+              title={
+                collapsed
+                  ? item.name
+                  : undefined
+              }
               className={`
-          group relative flex items-center gap-3
-          rounded-md px-3 py-2.5
-          text-sm font-medium
-          transition-all duration-200
+                group
+                flex
+                h-10
+                items-center
+                rounded-md
+                text-sm
+                font-medium
+                transition-all
+                duration-200
+                ease-out
 
-          ${
-            isActive
-              ? "bg-primary text-primary-foreground shadow-sm"
-              : "text-muted-foreground hover:bg-secondary hover:text-foreground"
-          }
-        `}
+                ${
+                  collapsed
+                    ? "justify-center px-0"
+                    : "gap-3 px-3"
+                }
+
+                ${
+                  isActive
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                }
+              `}
             >
               <Icon
                 size={18}
-                strokeWidth={isActive ? 2.3 : 1.8}
+                strokeWidth={
+                  isActive ? 2.3 : 1.8
+                }
                 className={`
-            shrink-0 transition-all duration-200
-            ${
-              isActive
-                ? "text-primary-foreground"
-                : "text-muted-foreground group-hover:text-primary"
-            }
-          `}
+                  shrink-0
+                  transition-colors
+                  duration-200
+
+                  ${
+                    isActive
+                      ? "text-primary-foreground"
+                      : "text-muted-foreground group-hover:text-primary"
+                  }
+                `}
               />
 
-              <span className="flex-1">{item.name}</span>
+              <span
+                className={`
+                  overflow-hidden
+                  whitespace-nowrap
+                  transition-all
+                  duration-200
+                  ease-out
 
-              {isActive && (
-                <span className="h-1.5 w-1.5 rounded-full bg-primary-foreground" />
-              )}
+                  ${
+                    collapsed
+                      ? "w-0 opacity-0"
+                      : "w-auto opacity-100"
+                  }
+                `}
+              >
+                {item.name}
+              </span>
             </Link>
           );
         })}
       </nav>
 
-      {/* User */}
+      {/* Profile */}
+
       <Link
         to="/profile"
-        className="flex items-center gap-3 rounded-xl border border-border bg-secondary/50 p-3 transition hover:bg-secondary"
+        title={
+          collapsed
+            ? "Profile"
+            : undefined
+        }
+        className={`
+          flex
+          items-center
+          rounded-md
+          border
+          border-border
+          bg-secondary/50
+          transition-all
+          duration-200
+          hover:bg-secondary
+
+          ${
+            collapsed
+              ? "h-10 w-10 justify-center self-center p-0"
+              : "gap-3 p-3"
+          }
+        `}
       >
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-sm">
+        {/* Avatar */}
+
+        <div
+          className="
+            flex
+            h-9
+            w-9
+            shrink-0
+            items-center
+            justify-center
+            rounded-md
+            bg-primary/10
+            text-sm
+          "
+        >
           👨🏻‍💼
         </div>
 
-        <div className="min-w-0 flex-1">
+        {/* User */}
+
+        <div
+          className={`
+            min-w-0
+            flex-1
+            overflow-hidden
+            whitespace-nowrap
+            transition-all
+            duration-200
+            ease-out
+
+            ${
+              collapsed
+                ? "w-0 opacity-0"
+                : "w-auto opacity-100"
+            }
+          `}
+        >
           <p className="truncate text-xs font-semibold text-foreground">
             Shopkeeper
           </p>
@@ -165,7 +358,11 @@ const Sidebar = () => {
           </p>
         </div>
 
-        <span className="text-xs text-muted-foreground">⌄</span>
+        {!collapsed && (
+          <span className="text-xs text-muted-foreground">
+            ⌄
+          </span>
+        )}
       </Link>
     </aside>
   );

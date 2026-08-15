@@ -1,7 +1,7 @@
 import React from "react";
 import { customerStatsCard } from "../constants/dashboardData";
-import CustomerStatCard from "../components/dashboard/CustomerStatCard";
-import AllCustomers from "../components/dashboard/AllCustomers";
+import CustomerStatCard from "../components/dashboard/customers/CustomerStatCard";
+import AllCustomers from "../components/dashboard/customers/AllCustomers";
 
 const Customers = () => {
   return (

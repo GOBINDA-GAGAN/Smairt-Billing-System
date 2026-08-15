@@ -9,7 +9,6 @@ import RecentCustomers from "../components/dashboard/RecentCustomers";
 import SalesChart from "../components/dashboard/SalesChart";
 
 const Dashboard = () => {
-  console.log(statCardsData);
   const [period, setPeriod] = useState("today");
 
   return (
@@ -19,7 +18,8 @@ const Dashboard = () => {
           name="period"
           value={period}
           onChange={(e) => setPeriod(e.target.value)}
-          className="rounded-md border border-border bg-card px-3 py-2 text-sm font-medium text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/10"
+          className="rounded-md border border-border bg-card px-3 py-2 text-sm font-medium 
+          text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/10"
         >
           {dashboardFilters.map((option, i) => (
             <option key={i} value={option.value}>

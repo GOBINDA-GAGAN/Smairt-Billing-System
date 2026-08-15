@@ -6,12 +6,12 @@ import {
   CreditCard,
   Settings,
   LogOut,
+  ChevronRight,
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 
-
-const AdminSideBar = () => {
+const AdminSideBar = ({ collapsed, setCollapsed }) => {
   const navigate = useNavigate();
   const { logout } = useAuth();
 
@@ -46,40 +46,154 @@ const AdminSideBar = () => {
   const handleLogout = async () => {
     try {
       await logout();
-      navigate("/login", { replace: true });
+
+      navigate("/login", {
+        replace: true,
+      });
     } catch (error) {
       console.error("Logout failed:", error);
     }
   };
 
   return (
-    <aside className="flex h-screen w-64 flex-col border-r border-border bg-background">
+    <aside
+      className={`
+        fixed
+        left-0
+        top-0
+        z-50
+        flex
+        h-screen
+        flex-col
+        border-r
+        border-border
+        bg-background
+        transition-[width]
+        duration-300
+        ease-in-out
+        ${collapsed ? "w-16" : "w-64"}
+      `}
+    >
+      {/* =====================================================
+          LOGO
+      ===================================================== */}
 
-      {/* Logo */}
-      <div className="flex h-16 items-center border-b border-border px-5">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary font-bold text-primary-foreground">
-            ₹
-          </div>
+      <div
+        className={`
+          flex
+          h-16
+          items-center
+          border-b
+          border-border
+          ${collapsed ? "justify-center px-2" : "justify-between px-4"}
+        `}
+      >
+        {/* Logo */}
 
-          <div>
-            <h1 className="text-sm font-bold text-foreground">
-              Smart Billing
-            </h1>
+        <div
+          className={`
+            flex
+            items-center
+            overflow-hidden
+            transition-all
+            duration-200
+            ${collapsed ? "w-0 opacity-0" : "w-auto opacity-100"}
+          `}
+        >
+          <div className="flex shrink-0 items-center gap-3">
+            <div
+              className="
+                flex
+                h-9
+                w-9
+                shrink-0
+                items-center
+                justify-center
+                rounded-md
+                bg-primary
+                font-bold
+                text-primary-foreground
+              "
+            >
+              ₹
+            </div>
 
-            <p className="text-[10px] text-foreground-muted">
-              Admin Panel
-            </p>
+            <div className="whitespace-nowrap">
+              <h1 className="text-sm font-bold text-foreground">
+                Smart Billing
+              </h1>
+
+              <p className="text-[10px] text-muted-foreground">
+                Admin Panel
+              </p>
+            </div>
           </div>
         </div>
+
+        {/* Collapse Button */}
+
+        <button
+          type="button"
+          onClick={() =>
+            setCollapsed((prev) => !prev)
+          }
+          title={
+            collapsed
+              ? "Expand sidebar"
+              : "Collapse sidebar"
+          }
+          className="
+            flex
+            h-8
+            w-8
+            shrink-0
+            items-center
+            justify-center
+            rounded-md
+            text-muted-foreground
+            transition-colors
+            duration-200
+            hover:bg-secondary
+            hover:text-foreground
+          "
+        >
+          <ChevronRight
+            size={17}
+            className={`
+              transition-transform
+              duration-300
+              ease-out
+              ${collapsed ? "rotate-180" : ""}
+            `}
+          />
+        </button>
       </div>
 
-      {/* Navigation */}
-      <nav className="flex-1 space-y-1 p-3">
+      {/* =====================================================
+          NAVIGATION
+      ===================================================== */}
 
-        <p className="mb-3 px-3 pt-2 text-[10px] font-semibold uppercase tracking-wider text-foreground-muted">
-          Management
-        </p>
+      <nav className="flex-1 space-y-1 p-3">
+        {/* Section Title */}
+
+        {!collapsed && (
+          <p
+            className="
+              mb-3
+              px-3
+              pt-2
+              text-[10px]
+              font-semibold
+              uppercase
+              tracking-wider
+              text-muted-foreground
+            "
+          >
+            Management
+          </p>
+        )}
+
+        {/* Menu */}
 
         {menuItems.map((item) => {
           const Icon = item.icon;
@@ -89,50 +203,127 @@ const AdminSideBar = () => {
               key={item.path}
               to={item.path}
               end={item.path === "/admin"}
+              title={
+                collapsed
+                  ? item.label
+                  : undefined
+              }
               className={({ isActive }) =>
                 `
-                flex items-center gap-3
-                rounded-lg
-                px-3 py-2.5
-                text-sm
-                transition
-                ${
-                  isActive
-                    ? "bg-primary text-primary-foreground"
-                    : "text-foreground-secondary hover:bg-secondary hover:text-foreground"
-                }
+                  group
+                  flex
+                  h-10
+                  items-center
+                  rounded-md
+                  text-sm
+                  transition-all
+                  duration-200
+
+                  ${
+                    collapsed
+                      ? "justify-center px-0"
+                      : "gap-3 px-3"
+                  }
+
+                  ${
+                    isActive
+                      ? "bg-primary text-primary-foreground"
+                      : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                  }
                 `
               }
             >
-              <Icon size={18} />
+              {({ isActive }) => (
+                <>
+                  <Icon
+                    size={18}
+                    strokeWidth={
+                      isActive ? 2.2 : 1.8
+                    }
+                    className="
+                      shrink-0
+                      transition-colors
+                      duration-200
+                    "
+                  />
 
-              <span>{item.label}</span>
+                  <span
+                    className={`
+                      overflow-hidden
+                      whitespace-nowrap
+                      transition-all
+                      duration-200
+                      ease-out
+                      ${
+                        collapsed
+                          ? "w-0 opacity-0"
+                          : "w-auto opacity-100"
+                      }
+                    `}
+                  >
+                    {item.label}
+                  </span>
+                </>
+              )}
             </NavLink>
           );
         })}
-
       </nav>
 
-      {/* Bottom */}
+      {/* =====================================================
+          LOGOUT
+      ===================================================== */}
+
       <div className="border-t border-border p-3">
         <button
+          type="button"
           onClick={handleLogout}
-          className="
-            flex w-full items-center gap-3
-            rounded-lg
-            px-3 py-2.5
+          title={
+            collapsed
+              ? "Logout"
+              : undefined
+          }
+          className={`
+            flex
+            h-10
+            w-full
+            items-center
+            rounded-md
             text-sm
             text-red-500
-            transition
+            transition-all
+            duration-200
             hover:bg-red-500/10
-          "
-        >
-          <LogOut size={18} />
 
-          <span>Logout</span>
+            ${
+              collapsed
+                ? "justify-center px-0"
+                : "gap-3 px-3"
+            }
+          `}
+        >
+          <LogOut
+            size={18}
+            className="shrink-0"
+          />
+
+          <span
+            className={`
+              overflow-hidden
+              whitespace-nowrap
+              transition-all
+              duration-200
+              ${
+                collapsed
+                  ? "w-0 opacity-0"
+                  : "w-auto opacity-100"
+              }
+            `}
+          >
+            Logout
+          </span>
         </button>
       </div>
-
     </aside>
   );
 };

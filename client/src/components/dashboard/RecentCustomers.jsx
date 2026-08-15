@@ -24,32 +24,32 @@ const RecentCustomers = ({ data = [] }) => {
       <div className="w-full overflow-x-auto">
         <table className="w-full min-w-[900px]">
           <thead>
-            <tr className="border-b border-secondary/20 text-left">
-              <th className="px-5 py-3 text-xs font-medium text-secondary">
+            <tr className="border-b border-border text-left">
+              <th className="px-4 py-2.5 text-[10px] font-semibold text-secondary">
                 Invoice
               </th>
 
-              <th className="px-5 py-3 text-xs font-medium text-secondary">
+              <th className="px-4 py-2.5 text-[10px] font-semibold text-secondary">
                 Customer
               </th>
 
-              <th className="px-5 py-3 text-xs font-medium text-secondary">
+              <th className="px-4 py-2.5 text-[10px] font-semibold text-secondary">
                 Date
               </th>
 
-              <th className="px-5 py-3 text-xs font-medium text-secondary">
+              <th className="px-4 py-2.5 text-[10px] font-semibold text-secondary">
                 Items
               </th>
 
-              <th className="px-5 py-3 text-xs font-medium text-secondary">
+              <th className="px-4 py-2.5 text-[10px] font-semibold text-secondary">
                 Total
               </th>
 
-              <th className="px-5 py-3 text-xs font-medium text-secondary">
+              <th className="px-4 py-2.5 text-[10px] font-semibold text-secondary">
                 Payment
               </th>
 
-              <th className="px-5 py-3 text-xs font-medium text-secondary">
+              <th className="px-4 py-2.5 text-[10px] font-semibold text-secondary">
                 Status
               </th>
             </tr>
@@ -59,68 +59,77 @@ const RecentCustomers = ({ data = [] }) => {
             {data.map((invoice) => (
               <tr
                 key={invoice.id}
-                className="border-b border-secondary/10 transition hover:bg-secondary/5"
+                className="
+            border-b border-border
+            transition-colors
+            hover:bg-muted/30
+          "
               >
                 {/* Invoice */}
-                <td className="px-5 py-4">
-                  <span className="text-sm font-medium text-primary">
+                <td className="px-4 py-2.5">
+                  <span className="text-xs font-semibold text-primary">
                     {invoice.id}
                   </span>
                 </td>
 
                 {/* Customer */}
-                <td className="px-5 py-4">
-                  <div>
-                    <p className="text-sm font-medium text-primary">
+                <td className="px-4 py-2.5">
+                  <div className="min-w-0">
+                    <p className="truncate text-xs font-semibold text-foreground">
                       {invoice.customerName}
                     </p>
 
-                    <p className="mt-0.5 text-xs text-secondary">
+                    <p className="mt-0.5 text-[10px] text-secondary">
                       {invoice.mobile}
                     </p>
                   </div>
                 </td>
 
                 {/* Date */}
-                <td className="px-5 py-4 text-sm text-secondary">
+                <td className="px-4 py-2.5 text-xs text-secondary">
                   {invoice.date}
                 </td>
 
                 {/* Items */}
-                <td className="px-5 py-4 text-sm text-secondary">
+                <td className="px-4 py-2.5 text-xs text-secondary">
                   {invoice.items}
                 </td>
 
                 {/* Total */}
-                <td className="px-5 py-4">
-                  <span className="text-sm font-semibold text-primary">
+                <td className="px-4 py-2.5">
+                  <span className="text-xs font-semibold text-foreground">
                     ₹{invoice.total.toLocaleString("en-IN")}
                   </span>
 
                   {invoice.due > 0 && (
-                    <p className="mt-0.5 text-xs text-red-400">
+                    <p className="mt-0.5 text-[10px] font-medium text-red-500">
                       Due ₹{invoice.due.toLocaleString("en-IN")}
                     </p>
                   )}
                 </td>
 
                 {/* Payment */}
-                <td className="px-5 py-4">
-                  <span className="text-sm text-secondary">
+                <td className="px-4 py-2.5">
+                  <span className="text-xs text-secondary">
                     {invoice.paymentMode}
                   </span>
                 </td>
 
                 {/* Status */}
-                <td className="px-5 py-4">
+                <td className="px-4 py-2.5">
                   <span
-                    className={`inline-flex rounded-full px-2.5 py-1 text-xs font-medium ${
-                      invoice.status === "Paid"
-                        ? "bg-green-500/10 text-green-400"
-                        : invoice.status === "Pending"
-                          ? "bg-yellow-500/10 text-yellow-400"
-                          : "bg-red-500/10 text-red-400"
-                    }`}
+                    className={`
+                inline-flex rounded-md
+                px-2 py-1
+                text-[9px] font-medium
+                ${
+                  invoice.status === "Paid"
+                    ? "bg-green-500/10 text-green-600"
+                    : invoice.status === "Pending"
+                      ? "bg-orange-500/10 text-orange-500"
+                      : "bg-red-500/10 text-red-500"
+                }
+              `}
                   >
                     {invoice.status}
                   </span>
@@ -132,10 +141,10 @@ const RecentCustomers = ({ data = [] }) => {
             {data.length === 0 && (
               <tr>
                 <td
-                  colSpan="7"
-                  className="px-5 py-10 text-center text-sm text-secondary"
+                  colSpan={7}
+                  className="px-4 py-10 text-center text-xs text-secondary"
                 >
-                  No recent customers found.
+                  No recent invoices found.
                 </td>
               </tr>
             )}

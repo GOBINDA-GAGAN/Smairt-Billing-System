@@ -22,8 +22,15 @@ const SalesChartGraph = ({ isAnimationActive = true }) => {
   ];
 
   return (
-    <div className="w-full rounded-xl border border-secondary/20 bg-primary/5 p-5">
-      {/* Chart */}
+    <div
+      className="
+    w-full min-w-0 overflow-hidden
+    rounded-lg sm:rounded-xl
+    border border-secondary/20
+    bg-primary/5
+    p-2 sm:p-4 lg:p-5
+  "
+    >
       <AreaChart
         style={{
           width: "100%",
@@ -34,34 +41,28 @@ const SalesChartGraph = ({ isAnimationActive = true }) => {
         responsive
         data={chartData}
         margin={{
-          top: 10,
-          right: 10,
-          left: 10,
+          top: 5,
+          right: 5,
+          left: 0,
           bottom: 0,
         }}
       >
         {/* Gradient */}
         <defs>
-  <linearGradient
-    id="salesGradient"
-    x1="0"
-    y1="0"
-    x2="0"
-    y2="1"
-  >
-    <stop
-      offset="5%"
-      stopColor="var(--color-primary)"
-      stopOpacity={0.3}
-    />
+          <linearGradient id="salesGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop
+              offset="5%"
+              stopColor="var(--color-primary)"
+              stopOpacity={0.3}
+            />
 
-    <stop
-      offset="95%"
-      stopColor="var(--color-primary)"
-      stopOpacity={0}
-    />
-  </linearGradient>
-</defs>
+            <stop
+              offset="95%"
+              stopColor="var(--color-primary)"
+              stopOpacity={0}
+            />
+          </linearGradient>
+        </defs>
 
         {/* Grid */}
         <CartesianGrid
@@ -75,18 +76,19 @@ const SalesChartGraph = ({ isAnimationActive = true }) => {
           dataKey="label"
           tick={{
             fill: "currentColor",
-            fontSize: 12,
+            fontSize: 9,
           }}
           tickLine={false}
           axisLine={false}
+          tickMargin={6}
         />
 
         {/* Y Axis */}
         <YAxis
-          width="auto"
+          width={42}
           tick={{
             fill: "currentColor",
-            fontSize: 12,
+            fontSize: 9,
           }}
           tickLine={false}
           axisLine={false}

@@ -77,31 +77,40 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
         left-0
         top-0
         z-50
-        flex
+
+        hidden
+        md:flex
+
         h-screen
         flex-col
+
         border-r
         border-border
         bg-card
+
         px-3
         py-5
+
         transition-[width]
         duration-300
         ease-in-out
+
         ${collapsed ? "w-16" : "w-64"}
       `}
     >
       {/* Logo */}
-
       <div
         className={`
           flex
           items-center
-          ${collapsed ? "justify-center" : "justify-between"}
+          ${
+            collapsed
+              ? "justify-center"
+              : "justify-between"
+          }
         `}
       >
         {/* Logo */}
-
         <Link
           to="/"
           className={`
@@ -110,7 +119,12 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
             overflow-hidden
             transition-all
             duration-200
-            ${collapsed ? "w-0 opacity-0" : "w-auto opacity-100"}
+
+            ${
+              collapsed
+                ? "w-0 opacity-0"
+                : "w-auto opacity-100"
+            }
           `}
         >
           <div className="flex shrink-0 items-center gap-2 px-1">
@@ -160,7 +174,6 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
         </Link>
 
         {/* Collapse Button */}
-
         <button
           type="button"
           onClick={() =>
@@ -192,15 +205,19 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
               transition-transform
               duration-300
               ease-out
-              ${collapsed ? "rotate-180" : ""}
+
+              ${
+                collapsed
+                  ? "rotate-180"
+                  : ""
+              }
             `}
           />
         </button>
       </div>
 
       {/* Navigation */}
-
-      <nav className="mt-7 flex-1 space-y-1.5">
+      <nav className="mt-7 flex-1 space-y-1.5 overflow-y-auto">
         {menuItems.map((item) => {
           const Icon = item.icon;
 
@@ -286,7 +303,6 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
       </nav>
 
       {/* Profile */}
-
       <Link
         to="/profile"
         title={
@@ -313,7 +329,6 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
         `}
       >
         {/* Avatar */}
-
         <div
           className="
             flex
@@ -331,7 +346,6 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
         </div>
 
         {/* User */}
-
         <div
           className={`
             min-w-0

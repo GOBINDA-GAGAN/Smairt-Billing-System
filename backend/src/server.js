@@ -45,7 +45,7 @@ app.get("/health", (req, res) => {
   });
 });
 
-app.use("/api/v1/auth",authRouter);
+app.use("/api/v1/auth", authRouter);
 
 /* ================================
         GLOBAL ERROR HANDLER
@@ -67,5 +67,5 @@ app.use((err, req, res, next) => {
 const PORT = env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running ............`);
 });

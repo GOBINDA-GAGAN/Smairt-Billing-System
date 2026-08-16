@@ -5,6 +5,7 @@ import validator from "validator";
 import userModel from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import { createToken } from "../utils/jwt.js";
+import { env } from "../config/env.config.js";
 
 export const registerUser = async (req, res) => {
   try {
@@ -109,9 +110,10 @@ export const loginUser = async (req, res) => {
     // Store token in HttpOnly cookie
     res.cookie("accessToken", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
+      secure: env.NODE_ENV === "production",
+      sameSite: env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 24 * 60 * 60 * 1000,
+      path: "/",
     });
 
     return res.status(HTTP_STATUS.OK).json({

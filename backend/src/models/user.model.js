@@ -23,6 +23,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  shopId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Shop",
+    required: true,
+    default: null,
+  },
 });
 
 const userModel = mongoose.model("User", userSchema);

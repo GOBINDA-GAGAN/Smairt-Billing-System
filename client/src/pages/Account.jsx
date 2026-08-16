@@ -1,95 +1,56 @@
 import React from "react";
+import { useAuth } from "../context/AuthContext";
 
 const Account = () => {
-  return (
-    <div className="max-w-2xl">
+  const { user } = useAuth();
 
-      <div className="mb-8">
-        <h2 className="text-lg font-semibold text-foreground">
+  return (
+    <div className="w-full max-w-2xl">
+      <div className="mb-6 sm:mb-8">
+        <h2 className="text-base font-semibold text-foreground sm:text-lg">
           General
         </h2>
 
-        <p className="mt-1 text-sm text-secondary">
+        <p className="mt-1 text-xs leading-5 text-secondary sm:text-sm">
           Manage your basic account information.
         </p>
       </div>
 
-      <div className="space-y-7">
-
-        <div>
-          <label className="mb-2 block text-sm font-medium text-foreground">
+      <div className="space-y-5 sm:space-y-6">
+        {/* USERNAME */}
+        <div className="min-w-0">
+          <label className="mb-2 block text-xs font-medium text-foreground sm:text-sm">
             Username
           </label>
 
-          <input
-            type="text"
-            defaultValue="AlokDey"
-            className="
-              h-11 w-full
-              rounded-md
-              border border-secondary/20
-              bg-card
-              px-4
-              text-sm text-foreground
-              outline-none
-              transition
-              focus:border-primary/50
-              focus:ring-2
-              focus:ring-primary/10
-            "
-          />
+          <div className="flex min-h-11 w-full min-w-0 items-center overflow-hidden rounded-md border border-secondary/20 bg-card px-3 sm:px-4">
+            <span className="w-full truncate text-xs text-foreground sm:text-sm">
+              {user?.name || "Not available"}
+            </span>
+          </div>
 
-          <p className="mt-2 text-xs text-secondary">
+          <p className="mt-2 text-[10px] leading-4 text-secondary sm:text-xs">
             Your username is used to identify your account.
           </p>
         </div>
 
-        <div>
-          <label className="mb-2 block text-sm font-medium text-foreground">
+        {/* EMAIL */}
+        <div className="min-w-0">
+          <label className="mb-2 block text-xs font-medium text-foreground sm:text-sm">
             Account Email
           </label>
 
-          <input
-            type="email"
-            defaultValue="alok@example.com"
-            className="
-              h-11 w-full
-              rounded-md
-              border border-secondary/20
-              bg-card
-              px-4
-              text-sm text-foreground
-              outline-none
-              transition
-              focus:border-primary/50
-              focus:ring-2
-              focus:ring-primary/10
-            "
-          />
+          <div className="flex min-h-11 w-full min-w-0 items-center overflow-hidden rounded-md border border-secondary/20 bg-card px-3 sm:px-4">
+            <span className="w-full truncate text-xs text-foreground sm:text-sm">
+              {user?.email || "Not available"}
+            </span>
+          </div>
 
-          <p className="mt-2 text-xs text-secondary">
-            This email is used for login and important account
+          <p className="mt-2 text-[10px] leading-4 text-secondary sm:text-xs">
+            Your account email is used for login and important account
             notifications.
           </p>
         </div>
-
-        <div className="flex justify-end border-t border-secondary/20 pt-6">
-          <button
-            type="button"
-            className="
-              rounded-md
-              bg-primary
-              px-5 py-2.5
-              text-sm font-medium
-              text-primary-foreground
-              transition
-              hover:opacity-90
-            "
-          >
-            Save Changes
-          </button>
-        </div>
-
       </div>
     </div>
   );

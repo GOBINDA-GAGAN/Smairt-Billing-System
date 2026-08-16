@@ -131,17 +131,17 @@ export const loginUser = async (req, res) => {
 export const currentUser = async (req, res) => {
   try {
     const userId = req.user.userId;
-    console.log(userId);
 
     const user = await userModel
       .findById(userId)
-      .select("_id name email role")
+      .select("_id name email role shopId")
       .lean();
     const userData = {
       id: user._id,
       name: user.name,
       email: user.email,
-      role:user.role
+      role: user.role,
+      shopId: user.shopId,
     };
 
     if (!user) {

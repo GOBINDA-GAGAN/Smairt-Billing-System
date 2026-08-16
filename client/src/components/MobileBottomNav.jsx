@@ -16,11 +16,11 @@ const MobileBottomNav = () => {
       icon: LayoutDashboard,
       path: "/",
     },
-  {
-    name: "New Bill",
-    path: "/new-bill",
-    icon: Plus,
-  },
+    {
+      label: "New Bill",
+      path: "/new-bill",
+      icon: Plus,
+    },
     {
       label: "Customers",
       icon: Users,
@@ -40,28 +40,8 @@ const MobileBottomNav = () => {
 
   return (
     <nav
-      className="
-        fixed
-        bottom-0
-        left-0
-        right-0
-        z-50
-
-        flex
-        h-16
-        w-full
-
-        items-center
-        border-t
-        border-border
-
-        bg-card/95
-        px-1.5
-        pb-[env(safe-area-inset-bottom)]
-        backdrop-blur-md
-
-        md:hidden
-      "
+      className=" fixed bottom-0 left-0 right-0 z-50 flex h-16 w-full items-center border-t border-border 
+                    bg-card/95 px-1.5 pb-[env(safe-area-inset-bottom)] backdrop-blur-md md:hidden"
     >
       {menuItems.map((item) => {
         const Icon = item.icon;
@@ -78,7 +58,7 @@ const MobileBottomNav = () => {
                   flex
                   h-full
                   w-full
-                  max-w-[90px]
+                  max-w-22.5
                   flex-col
                   items-center
                   justify-center
@@ -106,17 +86,10 @@ const MobileBottomNav = () => {
                     transition-all
                     duration-200
 
-                    ${
-                      isActive
-                        ? "bg-primary/10"
-                        : "bg-transparent"
-                    }
+                    ${isActive ? "bg-primary/10" : "bg-transparent"}
                   `}
                 >
-                  <Icon
-                    size={19}
-                    strokeWidth={isActive ? 2.5 : 2}
-                  />
+                  <Icon size={19} strokeWidth={isActive ? 2.5 : 2} />
                 </div>
 
                 {/* Label */}
@@ -126,11 +99,7 @@ const MobileBottomNav = () => {
                     truncate
                     text-[9px]
                     leading-3
-                    ${
-                      isActive
-                        ? "font-semibold"
-                        : "font-medium"
-                    }
+                    ${isActive ? "font-semibold" : "font-medium"}
                   `}
                 >
                   {item.label}

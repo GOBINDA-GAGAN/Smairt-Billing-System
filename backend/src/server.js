@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import { env } from "./config/env.config.js";
 import connectDB from "./config/db.config.js";
 import authRouter from "./routes/auth.route.js";
+import shopRoute from "./routes/shop.route.js";
 
 const app = express();
 
@@ -46,6 +47,7 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/shop", shopRoute);
 
 /* ================================
         GLOBAL ERROR HANDLER

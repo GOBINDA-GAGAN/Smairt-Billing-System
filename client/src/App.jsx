@@ -4,6 +4,7 @@ import Product from "./pages/Product";
 import AddProduct from "./components/dashboard/products/AddProduct";
 import InvoicePreview from "./pages/InvoicePreview";
 import CreateShop from "./pages/CreateShop";
+import Settings from "./pages/Settings";
 
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
@@ -75,6 +76,7 @@ const App = () => {
                 <Route path="/account/profile" element={<EditProfile />} />
 
                 <Route path="/account/password" element={<Password />} />
+                <Route path="/account/setting" element={<Settings/>} />
 
                 <Route path="/account/shop" element={<YourShop />} />
               </Route>

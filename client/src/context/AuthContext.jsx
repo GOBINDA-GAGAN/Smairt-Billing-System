@@ -19,8 +19,6 @@ export const AuthProvider = ({ children }) => {
   const checkAuth = async () => {
     try {
       const response = await getCurrentUser();
-      console.log(response.data);
-      
 
       if (response.data.success) {
         setUser(response.data.user);
@@ -40,8 +38,8 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   // Login
-  const login = async (data) => {
-    try {
+const login = async (data) => {
+     try {
       setLoading(true);
 
       const response = await loginUser(data);
@@ -50,7 +48,7 @@ export const AuthProvider = ({ children }) => {
         throw new Error(response.data.message);
       }
 
-      const userData = response.data.user;
+  const userData = response.data.user;
 
       setUser(userData);
 
@@ -62,11 +60,9 @@ export const AuthProvider = ({ children }) => {
 
   // Register
   const register = async (data) => {
-    try {
+     try {
       setLoading(true);
-
       const response = await registerUser(data);
-
       return response.data;
     } finally {
       setLoading(false);

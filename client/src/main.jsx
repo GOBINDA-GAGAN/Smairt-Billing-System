@@ -5,14 +5,17 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { Toaster } from "sonner";
+import { ShopProvider } from "./context/ShopContex.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <Toaster position="top-right" />
-        <App />
+        <ShopProvider>
+          <Toaster position="top-right" />
+          <App />
+        </ShopProvider>
       </AuthProvider>
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
 );

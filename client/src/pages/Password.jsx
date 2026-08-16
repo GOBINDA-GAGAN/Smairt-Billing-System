@@ -7,22 +7,20 @@ const Password = () => {
   const [showConfirm, setShowConfirm] = useState(false);
 
   return (
-    <div className="max-w-2xl">
-
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-xl font-semibold text-foreground">
+    <div className="w-full min-w-0 max-w-2xl">
+      {/* HEADER */}
+      <div className="mb-5 sm:mb-6 md:mb-8">
+        <h1 className="text-lg font-semibold text-foreground sm:text-xl">
           Password
         </h1>
 
-        <p className="mt-1 text-sm text-secondary">
+        <p className="mt-1 text-xs leading-4 text-secondary sm:text-sm">
           Update your account password
         </p>
       </div>
 
-      <div className="space-y-6">
-
-        {/* Current Password */}
+      <div className="w-full space-y-5 sm:space-y-6">
+        {/* CURRENT PASSWORD */}
         <PasswordInput
           label="Current Password"
           placeholder="Enter current password"
@@ -30,7 +28,7 @@ const Password = () => {
           setShow={setShowCurrent}
         />
 
-        {/* New Password */}
+        {/* NEW PASSWORD */}
         <PasswordInput
           label="New Password"
           placeholder="Enter new password"
@@ -38,7 +36,7 @@ const Password = () => {
           setShow={setShowNew}
         />
 
-        {/* Confirm Password */}
+        {/* CONFIRM PASSWORD */}
         <PasswordInput
           label="Confirm New Password"
           placeholder="Confirm new password"
@@ -46,41 +44,29 @@ const Password = () => {
           setShow={setShowConfirm}
         />
 
-        {/* Password Requirements */}
-        <div className="rounded-md border border-secondary/20 bg-card p-4">
-          <p className="text-xs font-medium text-foreground">
+        {/* REQUIREMENTS */}
+        <div className="w-full rounded-md border border-secondary/20 bg-card p-3 sm:p-4">
+          <p className="text-xs font-medium text-foreground sm:text-sm">
             Password requirements
           </p>
 
-          <ul className="mt-2 space-y-1 text-xs text-secondary">
+          <ul className="mt-2 space-y-1 text-[10px] leading-4 text-secondary sm:text-xs">
             <li>• At least 6 characters</li>
             <li>• Use a combination of letters and numbers</li>
             <li>• Avoid using an easily guessed password</li>
           </ul>
         </div>
 
-        {/* Save */}
-        <div className="flex justify-end border-t border-secondary/20 pt-6">
+        {/* UPDATE */}
+        <div className="flex w-full flex-col gap-3 border-t border-secondary/20 pt-4 sm:flex-row sm:items-center sm:justify-end sm:pt-5 md:pt-6">
           <button
             type="button"
-            className="
-              flex items-center gap-2
-              rounded-md
-              bg-primary
-              px-5 py-2.5
-              text-sm font-medium
-              text-primary-foreground
-              shadow-sm
-              transition
-              hover:opacity-90
-              active:scale-[0.98]
-            "
+            className="flex h-10 w-full items-center justify-center gap-2 rounded-md bg-primary px-4 text-xs font-medium text-primary-foreground shadow-sm transition hover:opacity-90 active:scale-[0.98] sm:w-auto sm:px-5 sm:text-sm"
           >
-            <Save size={16} />
+            <Save size={15} className="sm:h-4 sm:w-4" />
             Update Password
           </button>
         </div>
-
       </div>
     </div>
   );
@@ -93,56 +79,30 @@ const PasswordInput = ({
   setShow,
 }) => {
   return (
-    <div>
-      <label className="mb-2 block text-sm font-medium text-foreground">
+    <div className="w-full min-w-0">
+      <label className="mb-1.5 block text-xs font-medium text-foreground sm:mb-2 sm:text-sm">
         {label}
       </label>
 
-      <div
-        className="
-          flex h-11 items-center gap-3
-          rounded-md
-          border border-secondary/20
-          bg-card
-          px-3.5
-          transition
-          focus-within:border-primary/50
-          focus-within:ring-2
-          focus-within:ring-primary/10
-        "
-      >
+      <div className="flex h-10 w-full min-w-0 items-center gap-2 rounded-md border border-secondary/20 bg-card px-3 transition focus-within:border-primary/50 focus-within:ring-2 focus-within:ring-primary/10 sm:h-11 sm:gap-3 sm:px-3.5">
         <Lock
-          size={17}
-          className="shrink-0 text-secondary"
+          size={16}
+          className="shrink-0 text-secondary sm:h-[17px] sm:w-[17px]"
         />
 
         <input
           type={show ? "text" : "password"}
           placeholder={placeholder}
-          className="
-            w-full
-            bg-transparent
-            text-sm text-foreground
-            outline-none
-            placeholder:text-foreground
-          "
+          className="min-w-0 flex-1 bg-transparent text-xs text-foreground outline-none placeholder:text-foreground/40 focus:placeholder:text-foreground/30 sm:text-sm"
         />
 
         <button
           type="button"
           onClick={() => setShow((prev) => !prev)}
-          className="
-            shrink-0
-            text-secondary
-            transition
-            hover:text-foreground
-          "
+          aria-label={show ? "Hide password" : "Show password"}
+          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-secondary transition hover:bg-secondary/10 hover:text-foreground"
         >
-          {show ? (
-            <EyeOff size={17} />
-          ) : (
-            <Eye size={17} />
-          )}
+          {show ? <EyeOff size={16} /> : <Eye size={16} />}
         </button>
       </div>
     </div>

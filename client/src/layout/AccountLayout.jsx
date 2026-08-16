@@ -1,13 +1,6 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import {
-  User,
-  Pencil,
-  Lock,
-  CreditCard,
-  Bell,
-  Store,
-} from "lucide-react";
+import { User, Pencil, Lock, Store, Settings } from "lucide-react";
 
 const AccountLayout = () => {
   const menuItems = [
@@ -26,15 +19,10 @@ const AccountLayout = () => {
       path: "/account/password",
       icon: Lock,
     },
-    // {
-    //   label: "Billing",
-    //   path: "/account/billing",
-    //   icon: CreditCard,
-    // },
     {
-      label: "Notifications",
-      path: "/account/notifications",
-      icon: Bell,
+      label: "Setting",
+      path: "/account/setting",
+      icon: Settings,
     },
     {
       label: "Your Shop",
@@ -44,26 +32,23 @@ const AccountLayout = () => {
   ];
 
   return (
-    <div className="min-h-full bg-background">
-
-      {/* Account Header */}
-      <div className="mb-8">
-        <h1 className="text-xl font-semibold text-foreground">
+    <div className="min-h-full w-full min-w-0 bg-background">
+      {/* HEADER */}
+      <div className="mb-5 sm:mb-6 md:mb-8">
+        <h1 className="text-lg font-semibold text-foreground sm:text-xl">
           Account
         </h1>
 
-        <p className="mt-1 text-sm text-secondary">
+        <p className="mt-1 text-xs leading-4 text-secondary sm:text-sm">
           Manage your account and shop settings
         </p>
       </div>
 
-      {/* Settings */}
-      <div className="grid gap-10 lg:grid-cols-[180px_minmax(0,1fr)]">
-
-        {/* Sidebar */}
-        <aside>
-          <nav className="space-y-1">
-
+      {/* CONTENT */}
+      <div className="grid min-w-0 gap-5 md:gap-6 lg:grid-cols-[180px_minmax(0,1fr)] lg:gap-10">
+        {/* SIDEBAR */}
+        <aside className="min-w-0">
+          <nav className="flex gap-1 overflow-x-auto rounded-lg border border-border bg-card p-1.5 lg:block lg:space-y-1 lg:border-0 lg:bg-transparent lg:p-0 lg:overflow-visible">
             {menuItems.map((item) => {
               const Icon = item.icon;
 
@@ -72,36 +57,28 @@ const AccountLayout = () => {
                   key={item.path}
                   to={item.path}
                   end={item.path === "/account"}
+                  title={item.label}
                   className={({ isActive }) =>
-                    `
-                    flex items-center gap-2
-                    rounded-md
-                    px-2 py-2
-                    text-sm
-                    transition
-                    ${
+                    `flex min-w-max shrink-0 items-center justify-center gap-2 rounded-md px-3 py-2 text-xs transition sm:justify-start sm:text-sm lg:w-full ${
                       isActive
                         ? "bg-secondary/10 font-medium text-primary"
                         : "text-secondary hover:bg-secondary/5 hover:text-primary"
-                    }
-                    `
+                    }`
                   }
                 >
-                  <Icon size={15} />
+                  <Icon size={15} className="shrink-0" />
 
-                  {item.label}
+                  <span className="hidden sm:inline">{item.label}</span>
                 </NavLink>
               );
             })}
-
           </nav>
         </aside>
 
-        {/* Page */}
-        <main className="min-w-0">
+        {/* PAGE */}
+        <main className="min-w-0 overflow-hidden">
           <Outlet />
         </main>
-
       </div>
     </div>
   );

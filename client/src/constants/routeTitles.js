@@ -10,4 +10,5 @@ export const routeTitles = {
   "/due-payments": "Due Payments",
   "/expenses": "Expenses",
   "/settings": "Settings",
+  "/categorys&brands":"Categorys & Brands"
 };

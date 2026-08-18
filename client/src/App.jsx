@@ -5,6 +5,9 @@ import AddProduct from "./components/dashboard/products/AddProduct";
 import InvoicePreview from "./pages/InvoicePreview";
 import CreateShop from "./pages/CreateShop";
 import Settings from "./pages/Settings";
+import CategoryPage from "./pages/CategoryPage";
+import AllBill from "./pages/AllBill";
+import BillDetails from "./pages/BillDetails";
 
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
@@ -62,13 +65,19 @@ const App = () => {
             <Route element={<Layout />}>
               <Route path="/" element={<Dashboard />} />
               <Route path="/new-bill" element={<NewBill />} />
+              <Route path="/all-bills" element={<AllBill />} />
+              <Route path="/bills/:billId" element={<BillDetails />} />
+              
               <Route path="/billing/new" element={<NewBill />} />
               <Route path="/products" element={<Product />} />
               <Route path="/customers" element={<Customers />} />
               <Route path="/products/add" element={<AddProduct />} />
               <Route path="/billing/invoice/:id" element={<InvoicePreview />} />
-              <Route path="/shop/create" element={<CreateShop />} />
+              <Route path="/categorys&brands" element={<CategoryPage />} />
 
+
+
+              <Route path="/shop/create" element={<CreateShop />} />
               {/* Account */}
               <Route element={<AccountLayout />}>
                 <Route path="/account" element={<Account />} />

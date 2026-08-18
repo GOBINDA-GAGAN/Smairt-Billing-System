@@ -12,6 +12,7 @@ import {
   Wallet,
   Settings,
   ChevronRight,
+  Tag,
 } from "lucide-react";
 
 const menuItems = [
@@ -26,8 +27,8 @@ const menuItems = [
     icon: Plus,
   },
   {
-    name: "Bills",
-    path: "/bills",
+    name: "All Bills",
+    path: "/all-bills",
     icon: Receipt,
   },
   {
@@ -35,6 +36,13 @@ const menuItems = [
     path: "/customers",
     icon: Users,
   },
+  {
+    name: "Category & Brands",
+    path: "/categorys&brands",
+    icon: Tag,
+  },
+
+
   {
     name: "Products",
     path: "/products",

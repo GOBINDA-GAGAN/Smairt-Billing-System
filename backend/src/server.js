@@ -5,6 +5,7 @@ import { env } from "./config/env.config.js";
 import connectDB from "./config/db.config.js";
 import authRouter from "./routes/auth.route.js";
 import shopRoute from "./routes/shop.route.js";
+import brandCategoryrouter from "./routes/brandCategory.route.js";
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.get("/health", (req, res) => {
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/shop", shopRoute);
+app.use("/api/v1/shop", brandCategoryrouter);
 
 /* ================================
         GLOBAL ERROR HANDLER

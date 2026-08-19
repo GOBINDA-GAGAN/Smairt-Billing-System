@@ -1,6 +1,6 @@
 import { HTTP_STATUS } from "../config/http.config.js";
 import userModel from "../models/user.model.js";
-import shopModel from "../models/shop.js";
+import shopModel from "../models/shop.model.js";
 
 export const createShop = async (req, res) => {
   try {

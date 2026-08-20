@@ -21,7 +21,7 @@ const brandCategoryrouter = express.Router();
 
 brandCategoryrouter.post("/brands",authenticate, createBrand);
 
-brandCategoryrouter.get("/brands", getBrands);
+brandCategoryrouter.get("/brands",authenticate, getBrands);
 
 brandCategoryrouter.get("/brands/:id", getBrand);
 

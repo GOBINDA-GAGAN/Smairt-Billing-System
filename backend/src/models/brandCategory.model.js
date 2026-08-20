@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-
 const categorySchema = new mongoose.Schema(
   {
     shopId: {
@@ -23,15 +22,10 @@ const categorySchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
-categorySchema.index(
-  { shopId: 1, name: 1 },
-  { unique: true }
-);
-
-
+categorySchema.index({ shopId: 1, name: 1 }, { unique: true });
 
 const brandSchema = new mongoose.Schema(
   {
@@ -46,6 +40,19 @@ const brandSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    status: {
+      type: String,
+      require: true,
+      default: "Active",
+    },
+    products: {
+      type: Number,
+      default: 0,
+    },
+    icon: {
+      type: String,
+      default: "Tag",
+    },
 
     description: {
       type: String,
@@ -55,19 +62,12 @@ const brandSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
-brandSchema.index(
-  { shopId: 1, name: 1 },
-  { unique: true }
-);
+brandSchema.index({ shopId: 1, name: 1 }, { unique: true });
 
 const categoryModel = mongoose.model("Category", categorySchema);
 const brandModel = mongoose.model("Brand", brandSchema);
 
-
-export {
-  categoryModel,
-  brandModel,
-};
+export { categoryModel, brandModel };

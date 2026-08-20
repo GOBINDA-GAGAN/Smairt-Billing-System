@@ -1,9 +1,8 @@
 // brandCategory.controller.js
 
 import { HTTP_STATUS } from "../config/http.config.js";
-import {  brandModel } from "../models/brandCategory.model.js";
+import { brandModel } from "../models/brandCategory.model.js";
 import userModel from "../models/user.model.js";
-
 
 /* =========================
    BRAND CONTROLLERS
@@ -17,9 +16,7 @@ export const createBrand = async (req, res) => {
 
     const brandName = name.trim().toUpperCase();
 
-    const user = await userModel
-      .findById(userId)
-      .select("shopId");
+    const user = await userModel.findById(userId).select("shopId");
 
     const shopId = user.shopId;
 
@@ -46,7 +43,6 @@ export const createBrand = async (req, res) => {
       message: "Brand created successfully",
       brand: newBrand,
     });
-
   } catch (error) {
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
       success: false,
@@ -59,7 +55,28 @@ export const createBrand = async (req, res) => {
 // Get All Brands
 export const getBrands = async (req, res) => {
   try {
-  } catch (error) {}
+    const userId = req.user.userId;
+
+    const user = await userModel
+      .findById(userId)
+      .select("shopId");
+
+    const allBrand = await brandModel.find({
+      shopId: user.shopId,
+    }).select(" _id name products status icon");
+
+    return res.status(HTTP_STATUS.OK).json({
+      success: true,
+      message: "Fetched all brands",
+      brands: allBrand,
+    });
+  } catch (error) {
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: "Failed to fetch brands",
+      error: error.message,
+    });
+  }
 };
 
 // Get Single Brand

@@ -23,24 +23,25 @@ brandCategoryrouter.post("/brands",authenticate, createBrand);
 
 brandCategoryrouter.get("/brands",authenticate, getBrands);
 
-brandCategoryrouter.get("/brands/:id", getBrand);
+brandCategoryrouter.get("/brands/:id",authenticate, getBrand);
 
-brandCategoryrouter.put("/brands/:id", updateBrand);
+brandCategoryrouter.put("/brands/:id",authenticate, updateBrand);
 
-brandCategoryrouter.delete("/brands/:id", deleteBrand);
+brandCategoryrouter.delete("/brands/:id",authenticate, deleteBrand);
 
 /* =========================
    CATEGORY ROUTES
 ========================= */
 
-brandCategoryrouter.post("/categories", createCategory);
+// Routes
+brandCategoryrouter.post("/categories", authenticate, createCategory);
 
-brandCategoryrouter.get("/categories", getCategories);
+brandCategoryrouter.get("/categories", authenticate, getCategories);
 
-brandCategoryrouter.get("/categories/:id", getCategory);
+brandCategoryrouter.get("/categories/:id", authenticate, getCategory);
 
-brandCategoryrouter.put("/categories/:id", updateCategory);
+brandCategoryrouter.put("/categories/:id", authenticate, updateCategory);
 
-brandCategoryrouter.delete("/categories/:id", deleteCategory);
+brandCategoryrouter.delete("/categories/:id", authenticate, deleteCategory);
 
 export default brandCategoryrouter;

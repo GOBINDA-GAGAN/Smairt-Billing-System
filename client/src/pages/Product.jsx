@@ -14,6 +14,7 @@ const productsData = [
     description: "Pain relief medicine",
     sku: "MED-1001",
     category: "Medicine",
+    brand:"",
     price: 40,
     sellPrice: 50,
     discount: 20,

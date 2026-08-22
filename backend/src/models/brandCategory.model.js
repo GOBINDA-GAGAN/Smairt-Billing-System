@@ -14,6 +14,22 @@ const categorySchema = new mongoose.Schema(
       trim: true,
     },
 
+    status: {
+      type: String,
+      required: true,
+      default: "Active",
+    },
+
+    products: {
+      type: Number,
+      default: 0,
+    },
+
+    icon: {
+      type: String,
+      default: "Folder",
+    },
+
     description: {
       type: String,
       trim: true,
@@ -22,7 +38,7 @@ const categorySchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 categorySchema.index({ shopId: 1, name: 1 }, { unique: true });

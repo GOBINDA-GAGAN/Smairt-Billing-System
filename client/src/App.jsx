@@ -8,6 +8,7 @@ import Settings from "./pages/Settings";
 import CategoryPage from "./pages/CategoryPage";
 import AllBill from "./pages/AllBill";
 import BillDetails from "./pages/BillDetails";
+import BrandCategoryDetails from "./pages/BrandCategoryDetails";
 
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
@@ -67,25 +68,23 @@ const App = () => {
               <Route path="/new-bill" element={<NewBill />} />
               <Route path="/all-bills" element={<AllBill />} />
               <Route path="/bills/:billId" element={<BillDetails />} />
-              
+
               <Route path="/billing/new" element={<NewBill />} />
               <Route path="/products" element={<Product />} />
               <Route path="/customers" element={<Customers />} />
               <Route path="/products/add" element={<AddProduct />} />
               <Route path="/billing/invoice/:id" element={<InvoicePreview />} />
               <Route path="/categorys&brands" element={<CategoryPage />} />
-
-
+              <Route path="/brands/:id" element={<BrandCategoryDetails type="brand" />}/>
+              <Route path="/categories/:id" element={<BrandCategoryDetails type="category" />}/>
 
               <Route path="/shop/create" element={<CreateShop />} />
               {/* Account */}
               <Route element={<AccountLayout />}>
                 <Route path="/account" element={<Account />} />
-
                 <Route path="/account/profile" element={<EditProfile />} />
-
                 <Route path="/account/password" element={<Password />} />
-                <Route path="/account/setting" element={<Settings/>} />
+                <Route path="/account/setting" element={<Settings />} />
 
                 <Route path="/account/shop" element={<YourShop />} />
               </Route>
